@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { useState } from "react"
-import { LayoutDashboard, FileText, Settings, LogOut, Users, Receipt, BarChart, CalendarRange, ChevronDown, Globe, Search, ShieldCheck } from "lucide-react"
+import { LayoutDashboard, FileText, Settings, LogOut, Users, Receipt, BarChart, CalendarRange, ChevronDown, Globe, Search, ShieldCheck, Briefcase } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { InquiryBadge } from "@/components/admin/InquiryBadge"
@@ -60,6 +60,20 @@ export function AdminSidebar({ className, onClose }: { className?: string, onClo
                                 >
                                     <Settings className="mr-2 h-4 w-4" />
                                     Services
+                                </Button>
+                            </Link>
+
+                            <Link href="/admin/portfolio">
+                                <Button
+                                    variant="ghost"
+                                    className={cn(
+                                        "w-full justify-start",
+                                        pathname.includes("/admin/portfolio") ? "text-primary" : "text-muted-foreground"
+                                    )}
+                                    onClick={handleLinkClick}
+                                >
+                                    <Briefcase className="mr-2 h-4 w-4" />
+                                    Portfolio
                                 </Button>
                             </Link>
 

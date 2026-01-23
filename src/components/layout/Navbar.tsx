@@ -14,7 +14,13 @@ import {
     navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"
+import {
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
+} from "@/components/ui/accordion"
 import { Menu, X, Code, Globe, Smartphone, BarChart, GraduationCap, Dumbbell, Utensils, Pill, Briefcase, Palette, Monitor, Zap } from "lucide-react"
 import { getServices, getProducts } from "@/actions/public-actions"
 
@@ -151,6 +157,14 @@ export function Navbar() {
 
                             <NavigationMenuItem>
                                 <NavigationMenuLink asChild>
+                                    <Link href="/portfolio" className={navigationMenuTriggerStyle()}>
+                                        Portfolio
+                                    </Link>
+                                </NavigationMenuLink>
+                            </NavigationMenuItem>
+
+                            <NavigationMenuItem>
+                                <NavigationMenuLink asChild>
                                     <Link href="/about" className={navigationMenuTriggerStyle()}>
                                         About Us
                                     </Link>
@@ -185,33 +199,73 @@ export function Navbar() {
                                 <span className="sr-only">Toggle menu</span>
                             </Button>
                         </SheetTrigger>
-                        <SheetContent side="left" className="bg-background/95 border-r border-white/10">
-                            <div className="flex flex-col gap-6 mt-8">
-                                <Link href="/" className="text-xl font-bold" onClick={() => setIsOpen(false)}>
+                        <SheetContent side="left" className="bg-background/95 border-r border-white/10 w-[300px] sm:w-[350px] overflow-y-auto">
+                            <SheetTitle className="sr-only">Mobile Menu</SheetTitle>
+                            <div className="flex flex-col gap-4 mt-6 pb-10">
+                                <Link href="/" className="text-lg font-bold py-2 border-b border-white/5" onClick={() => setIsOpen(false)}>
                                     Home
                                 </Link>
-                                <Link href="/about" className="text-xl font-bold" onClick={() => setIsOpen(false)}>
+
+                                <Accordion type="single" collapsible className="w-full">
+                                    <AccordionItem value="services" className="border-white/5">
+                                        <AccordionTrigger className="text-lg font-bold py-3 no-underline hover:no-underline">Services</AccordionTrigger>
+                                        <AccordionContent>
+                                            <div className="flex flex-col gap-3 pl-2 py-2">
+                                                {services.map(item => (
+                                                    <Link key={item.title} href={`/services/${item.slug}`} className="text-base text-muted-foreground hover:text-primary transition-colors block py-1" onClick={() => setIsOpen(false)}>
+                                                        {item.title}
+                                                    </Link>
+                                                ))}
+                                                {services.length === 0 && <span className="text-sm text-zinc-500">No services available</span>}
+                                            </div>
+                                        </AccordionContent>
+                                    </AccordionItem>
+
+                                    <AccordionItem value="products" className="border-white/5">
+                                        <AccordionTrigger className="text-lg font-bold py-3 no-underline hover:no-underline">Products</AccordionTrigger>
+                                        <AccordionContent>
+                                            <div className="flex flex-col gap-3 pl-2 py-2">
+                                                {products.map(item => (
+                                                    <Link key={item.title} href={`/products/${item.slug}`} className="text-base text-muted-foreground hover:text-primary transition-colors block py-1" onClick={() => setIsOpen(false)}>
+                                                        {item.title}
+                                                    </Link>
+                                                ))}
+                                                {products.length === 0 && <span className="text-sm text-zinc-500">No products available</span>}
+                                            </div>
+                                        </AccordionContent>
+                                    </AccordionItem>
+
+                                    <AccordionItem value="careers" className="border-white/5">
+                                        <AccordionTrigger className="text-lg font-bold py-3 no-underline hover:no-underline">Careers</AccordionTrigger>
+                                        <AccordionContent>
+                                            <div className="flex flex-col gap-3 pl-2 py-2">
+                                                {careers.map(item => (
+                                                    <Link key={item.title} href={item.href} className="text-base text-muted-foreground hover:text-primary transition-colors block py-1" onClick={() => setIsOpen(false)}>
+                                                        {item.title}
+                                                    </Link>
+                                                ))}
+                                            </div>
+                                        </AccordionContent>
+                                    </AccordionItem>
+                                </Accordion>
+
+                                <Link href="/portfolio" className="text-lg font-bold py-2 border-b border-white/5" onClick={() => setIsOpen(false)}>
+                                    Portfolio
+                                </Link>
+
+                                <Link href="/blogs" className="text-lg font-bold py-2 border-b border-white/5" onClick={() => setIsOpen(false)}>
+                                    Blogs
+                                </Link>
+
+                                <Link href="/about" className="text-lg font-bold py-2 border-b border-white/5" onClick={() => setIsOpen(false)}>
                                     About Us
                                 </Link>
-                                <div className="flex flex-col gap-3">
-                                    <span className="text-sm font-semibold text-muted-foreground uppercase">Services</span>
-                                    {services.map(item => (
-                                        <Link key={item.title} href={`/services/${item.slug}`} className="text-lg pl-4" onClick={() => setIsOpen(false)}>
-                                            {item.title}
-                                        </Link>
-                                    ))}
+
+                                <div className="pt-4">
+                                    <Link href="/contact" onClick={() => setIsOpen(false)}>
+                                        <Button className="w-full bg-gradient-to-r from-primary to-secondary">Book Appointment</Button>
+                                    </Link>
                                 </div>
-                                <div className="flex flex-col gap-3">
-                                    <span className="text-sm font-semibold text-muted-foreground uppercase">Products</span>
-                                    {products.map(item => (
-                                        <Link key={item.title} href={`/products/${item.slug}`} className="text-lg pl-4" onClick={() => setIsOpen(false)}>
-                                            {item.title}
-                                        </Link>
-                                    ))}
-                                </div>
-                                <Link href="/contact" onClick={() => setIsOpen(false)}>
-                                    <Button className="w-full mt-4">Book Appointment</Button>
-                                </Link>
                             </div>
                         </SheetContent>
                     </Sheet>

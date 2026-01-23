@@ -14,7 +14,7 @@ interface StatsProps {
 
 function Counter({ value }: { value: number }) {
     const ref = useRef<HTMLSpanElement>(null)
-    const inView = useInView(ref, { once: true, margin: "-100px" })
+    const inView = useInView(ref, { once: true }) // Removed margin constraint for mobile reliability
     const motionValue = useMotionValue(0)
     const springValue = useSpring(motionValue, {
         damping: 50,
@@ -53,20 +53,20 @@ export function StatsCounter({ projects, clients, years, team }: StatsProps) {
             <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[100px] -translate-y-1/2 -z-20" />
 
             <div className="container mx-auto px-4 max-w-6xl">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
                     {stats.map((stat, index) => (
                         <motion.div
                             key={stat.label}
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
+                            viewport={{ once: true, margin: "-50px" }} // Reduced margin validation
                             transition={{ delay: index * 0.1 }}
                             className="text-center group"
                         >
                             <div className={`mx-auto w-16 h-16 rounded-2xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110 ${stat.bg}`}>
                                 <stat.icon className={`h-8 w-8 ${stat.color}`} />
                             </div>
-                            <div className="text-4xl md:text-5xl font-bold mb-2">
+                            <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2">
                                 <Counter value={stat.value} />+
                             </div>
                             <p className="text-muted-foreground font-medium">{stat.label}</p>
