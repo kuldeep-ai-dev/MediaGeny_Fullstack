@@ -6,7 +6,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { AdminSidebar } from "./AdminSidebar"
 import { useState } from "react"
 
-export function AdminHeader() {
+export function AdminHeader({ title }: { title?: string }) {
     const [isMobileOpen, setIsMobileOpen] = useState(false)
 
     return (
@@ -25,7 +25,9 @@ export function AdminHeader() {
                     </SheetContent>
                 </Sheet>
 
-                <h1 className="text-xl font-bold tracking-tight">MediaGeny Admin</h1>
+                <h1 className="text-xl font-bold tracking-tight">
+                    {title || "MediaGeny Admin"}
+                </h1>
             </div>
 
             {/* Right Side Actions (Optional) */}
