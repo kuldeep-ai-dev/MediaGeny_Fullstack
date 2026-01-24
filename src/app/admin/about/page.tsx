@@ -36,6 +36,7 @@ export default function AdminAboutPage() {
     const [legalDocs, setLegalDocs] = useState<LegalDocument[]>([])
     const [isLoading, setIsLoading] = useState(true)
     const [isSaving, setIsSaving] = useState(false)
+    const [activeTab, setActiveTab] = useState("profile")
 
     useEffect(() => {
         loadData()
@@ -137,7 +138,7 @@ export default function AdminAboutPage() {
                 <p className="text-muted-foreground">Manage company profile, contact details, team, and legal docs.</p>
             </div>
 
-            <Tabs defaultValue="profile" className="space-y-4">
+            <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
                 <TabsList>
                     <TabsTrigger value="profile">Profile</TabsTrigger>
                     <TabsTrigger value="contact">Contact & Map</TabsTrigger>
