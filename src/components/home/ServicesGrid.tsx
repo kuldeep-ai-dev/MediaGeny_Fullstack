@@ -44,31 +44,35 @@ export function ServicesGrid({ services }: ServicesGridProps) {
                     return (
                         <div
                             key={service.slug}
-                            className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all hover:bg-white/10 hover:shadow-2xl hover:-translate-y-2"
+                            className="group relative h-full"
                             style={{
                                 animationDelay: `${index * 100}ms`,
                             }}
                         >
-                            {/* Gradient Glow on Hover */}
-                            <div className={`absolute inset-0 -z-10 opacity-0 transition-opacity duration-500 group-hover:opacity-20 bg-gradient-to-br ${service.gradient}`} />
+                            <Link href={`/services/${service.slug}`} className="block h-full">
+                                <div className="absolute -inset-0.5 bg-gradient-to-r from-primary to-purple-600 rounded-2xl opacity-0 group-hover:opacity-70 transition duration-500 blur opacity-20"></div>
+                                <div className="relative h-full flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-zinc-950/80 p-6 backdrop-blur-md transition-all duration-300 group-hover:-translate-y-1">
+                                    {/* Gradient Glow */}
+                                    <div className={`absolute top-0 right-0 -mr-16 -mt-16 h-32 w-32 rounded-full bg-gradient-to-br ${service.gradient} opacity-20 blur-2xl transition-all duration-500 group-hover:scale-150 group-hover:opacity-30`} />
 
-                            <div className={`mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${service.gradient} text-white shadow-lg`}>
-                                {isUrl ? (
-                                    <NextImage src={service.icon_name} alt={service.title} width={24} height={24} className="h-6 w-6 object-contain" />
-                                ) : (
+                                    <div>
+                                        <div className={`mb-6 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br ${service.gradient} text-white shadow-lg ring-1 ring-white/20`}>
+                                            {isUrl ? (
+                                                <NextImage src={service.icon_name} alt={service.title} width={28} height={28} className="h-7 w-7 object-contain" />
+                                            ) : (
+                                                Icon && <Icon className="h-7 w-7" />
+                                            )}
+                                        </div>
 
-                                    Icon && <Icon className="h-6 w-6" />
-                                )}
-                            </div>
+                                        <h3 className="mb-3 text-xl font-bold tracking-tight">{service.title}</h3>
+                                        <p className="mb-6 text-muted-foreground line-clamp-3 text-sm leading-relaxed">{service.short_description}</p>
+                                    </div>
 
-                            <h3 className="mb-2 text-xl font-semibold">{service.title}</h3>
-                            <p className="mb-6 text-muted-foreground line-clamp-3">{service.short_description}</p>
-
-                            <Link
-                                href={`/services/${service.slug}`}
-                                className="inline-flex items-center text-sm font-medium text-primary transition-colors group-hover:text-white"
-                            >
-                                Learn more <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                                    <div className="flex items-center text-sm font-semibold text-primary group-hover:text-purple-400 transition-colors mt-auto">
+                                        Learn more
+                                        <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5" />
+                                    </div>
+                                </div>
                             </Link>
                         </div>
                     )

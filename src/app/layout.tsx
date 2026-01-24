@@ -22,6 +22,8 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
+import { GoogleAnalytics } from '@next/third-parties/google'
+
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -32,6 +34,7 @@ export default async function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={`${inter.className} min-h-screen bg-background antialiased selection:bg-primary/20`}>
+        <GoogleAnalytics gaId="G-V7GRS6W8XN" />
         <JsonLd data={data?.schema_markup} />
         <Navbar />
         {children}
