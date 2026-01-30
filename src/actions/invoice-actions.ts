@@ -41,6 +41,7 @@ export async function saveBusinessProfile(profile: any) {
         if (error) throw error
 
         revalidatePath("/admin/invoices/settings")
+        revalidatePath("/admin/invoices", "layout")
         return { success: true, data }
     } catch (error: any) {
         return { success: false, error: error.message }
@@ -64,6 +65,7 @@ export async function deleteClient(id: string) {
         const { error } = await supabase.from("clients").delete().eq("id", id)
         if (error) throw error
         revalidatePath("/admin/invoices/clients")
+        revalidatePath("/admin/invoices", "layout")
         return { success: true }
     } catch (error: any) {
         return { success: false, error: error.message }
@@ -79,6 +81,7 @@ export async function upsertClient(client: any) {
         if (error) throw error
 
         revalidatePath("/admin/invoices/clients")
+        revalidatePath("/admin/invoices", "layout")
         return { success: true, data }
     } catch (error: any) {
         return { success: false, error: error.message }
