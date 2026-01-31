@@ -211,6 +211,19 @@ export function AdminSidebar({ className, onClose }: { className?: string, onClo
                         <InquiryBadge />
                     </Button>
                 </Link>
+                <Link href="/admin/agreements">
+                    <Button
+                        variant="ghost"
+                        className={cn(
+                            "w-full justify-start",
+                            pathname.includes("/admin/agreements") ? "bg-white/10" : ""
+                        )}
+                        onClick={handleLinkClick}
+                    >
+                        <ShieldCheck className="mr-2 h-4 w-4" />
+                        Agreements
+                    </Button>
+                </Link>
                 <Link href="/admin/subscriptions">
                     <Button
                         variant="ghost"

@@ -803,3 +803,72 @@ export async function generateReportData(dateRange: { from: Date, to: Date }) {
         return { success: false, error: error.message }
     }
 }
+
+// --- Module 11: Service Agreements ---
+
+export async function getAgreements() {
+    try {
+        const { data, error } = await supabase
+            .from("agreements")
+            .select("*")
+            .order("created_at", { ascending: false })
+
+        if (error) throw error
+        return { success: true, data }
+    } catch (error: any) {
+        return { success: false, error: error.message }
+    }
+}
+
+export async function getAgreement(id: string) {
+    try {
+        const { data, error } = await supabase
+            .from("agreements")
+            .select("*")
+            .eq("id", id)
+            .single()
+
+        if (error) throw error
+        return { success: true, data }
+    } catch (error: any) {
+        return { success: false, error: error.message }
+    }
+}
+
+export async function saveAgreement(agreementData: any) {
+    try {
+        const payload = {
+            ...agreementData,
+            updated_at: new Date().toISOString()
+        }
+
+        if (!payload.created_at) {
+            payload.created_at = new Date().toISOString()
+        }
+
+        const { data, error } = await supabase
+            .from("agreements")
+            .upsert(payload)
+            .select()
+            .single()
+
+        if (error) throw error
+
+        revalidatePath("/admin/agreements")
+        revalidatePath(`/admin/agreements/${data.id}`)
+        return { success: true, data }
+    } catch (error: any) {
+        return { success: false, error: error.message }
+    }
+}
+
+export async function deleteAgreement(id: string) {
+    try {
+        const { error } = await supabase.from("agreements").delete().eq("id", id)
+        if (error) throw error
+        revalidatePath("/admin/agreements")
+        return { success: true }
+    } catch (error: any) {
+        return { success: false, error: error.message }
+    }
+}
