@@ -29,6 +29,7 @@ export async function Footer() {
                             <li><Link href="/about" className="hover:text-primary transition-colors block py-1">About Us</Link></li>
                             <li><Link href="/careers/jobs" className="hover:text-primary transition-colors block py-1">Job Openings</Link></li>
                             <li><Link href="/contact" className="hover:text-primary transition-colors block py-1">Book Appointment</Link></li>
+                            <li><Link href="/subscription" className="hover:text-primary transition-colors block py-1">Pay Subscription</Link></li>
                             <li><Link href="/legal" className="hover:text-primary transition-colors block py-1">Legal Documentation</Link></li>
                         </ul>
                     </div>
@@ -102,8 +103,9 @@ export async function Footer() {
                 <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted-foreground pt-8 border-t border-white/10">
                     <p>© 2026 MediaGeny Tech Solutions. All rights reserved.</p>
                     <div className="flex gap-6">
-                        <Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link>
-                        <Link href="/legal" className="hover:text-white transition-colors">Terms of Service</Link>
+                        <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
+                        <Link href="/terms-of-service" className="hover:text-white transition-colors">Terms of Service</Link>
+                        <Link href="/refund-policy" className="hover:text-white transition-colors">Refund & Cancellation Policy</Link>
                         <Link href="/site-map" className="hover:text-white transition-colors">Sitemap</Link>
                     </div>
                 </div>

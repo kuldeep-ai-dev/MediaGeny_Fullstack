@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { useState } from "react"
-import { LayoutDashboard, FileText, Settings, LogOut, Users, Receipt, BarChart, CalendarRange, ChevronDown, Globe, Search, ShieldCheck, Briefcase } from "lucide-react"
+import { LayoutDashboard, FileText, Settings, LogOut, Users, Receipt, BarChart, CalendarRange, ChevronDown, Globe, Search, ShieldCheck, Briefcase, CreditCard } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { InquiryBadge } from "@/components/admin/InquiryBadge"
@@ -229,12 +229,25 @@ export function AdminSidebar({ className, onClose }: { className?: string, onClo
                         variant="ghost"
                         className={cn(
                             "w-full justify-start",
-                            pathname.includes("/admin/subscriptions") ? "bg-white/10" : ""
+                            pathname.includes("/admin/subscriptions") && !pathname.includes("/admin/subscriptions-software") ? "bg-white/10" : ""
                         )}
                         onClick={handleLinkClick}
                     >
                         <CalendarRange className="mr-2 h-4 w-4" />
                         Subscriptions
+                    </Button>
+                </Link>
+                <Link href="/admin/subscriptions-software">
+                    <Button
+                        variant="ghost"
+                        className={cn(
+                            "w-full justify-start",
+                            pathname.includes("/admin/subscriptions-software") ? "bg-white/10" : ""
+                        )}
+                        onClick={handleLinkClick}
+                    >
+                        <CreditCard className="mr-2 h-4 w-4" />
+                        Software Subs
                     </Button>
                 </Link>
                 <Link href="/admin/reports">
@@ -263,7 +276,7 @@ export function AdminSidebar({ className, onClose }: { className?: string, onClo
                         Security
                     </Button>
                 </Link>
-            </div>
+            </div >
             <div className="border-t border-white/10 p-4">
                 <Button
                     variant="ghost"
@@ -279,6 +292,6 @@ export function AdminSidebar({ className, onClose }: { className?: string, onClo
                     Logout
                 </Button>
             </div>
-        </div>
+        </div >
     )
 }
